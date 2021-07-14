@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 ######### Services ###################################
 
@@ -10,13 +10,15 @@ services:
       - MYSQL_DATABASE=landlord
     ports:
       - "3306:3306"
+    networks:
+      - familytree365
+
   # Server container
   nginx:
     build:
       context: docker/dev/nginx
       dockerfile: Dockerfile
     volumes:
-      - ./:/var/www
       - ./docker/dev/nginx/logs:/var/log/nginx
     ports:
       # Nuxt port
@@ -28,6 +30,8 @@ services:
     depends_on:
       - client
       - php
+    networks:
+      - familytree365
 
   # PHP FastCGI Process Manager container
   php:
@@ -44,6 +48,8 @@ services:
       - mysql
       - redis
       - mailhog
+    networks:
+      - familytree365
 
   # Supervisor container (schedule and queue runner)
   supervisor:
@@ -58,11 +64,15 @@ services:
       - mysql
       - redis
       - mailhog
+    networks:
+      - familytree365
 
   echo-server:
     image: oanhnn/laravel-echo-server:latest
     ports:
       - "6001:6001"
+    networks:
+      - familytree365
 
   # Redis container
   redis:
@@ -73,6 +83,8 @@ services:
       - redis:/data
     ports:
       - 63791:6379
+    networks:
+      - familytree365
 
   # Mailhog container (SMTP testing)
   mailhog:
@@ -81,16 +93,18 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8026:8025
+    networks:
+      - familytree365
 
   # Client container
   client:
     build:
       context: docker/dev/client
       dockerfile: Dockerfile
-    volumes:
-      - ./client:/var/www/client
     env_file:
       - ./.env.client
+    networks:
+          - familytree365
 
 ######### Volumes ###################################
 
@@ -99,3 +113,8 @@ volumes:
     driver: local
   redis:
     driver: local
+
+#Docker Networks
+networks:
+  familytree365:
+    driver: bridge

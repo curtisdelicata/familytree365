@@ -14,10 +14,11 @@ services:
       - familytree365
 
   # Server container
-  nginx:
+  backend:
     build:
       context: docker/dev/nginx
       dockerfile: Dockerfile
+    image: familytree365/backend  # goes to your repository on Docker Hub
     volumes:
       - ./docker/dev/nginx/logs:/var/log/nginx
     ports:
@@ -97,10 +98,11 @@ services:
       - familytree365
 
   # Client container
-  client:
+  frontend:
     build:
       context: docker/dev/client
       dockerfile: Dockerfile
+    image: familytree365/frontend  # goes to your repository on Docker Hub
     env_file:
       - ./.env.client
     networks:

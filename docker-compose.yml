@@ -23,6 +23,8 @@ services:
       - 8080:80
       # Laravel port
       - 8081:81
+    env_file:
+      - ./.env.api
     depends_on:
       - client
       - php
@@ -87,6 +89,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./client:/var/www/client
+    env_file:
+      - ./.env.client
 
 ######### Volumes ###################################
 

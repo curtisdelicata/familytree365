@@ -1,6 +1,8 @@
 # Image
 FROM nginx:alpine
 
+WORKDIR /var/www
+
 # Add config
 COPY default.conf /etc/nginx/conf.d/default.conf
 
@@ -11,9 +13,8 @@ RUN apt update && \
 	&& apt del devs gcc make python wget unzip ca-certificates \
 	&& npm cache clean \
 	&& rm -rf /tmp/npm* \
-  
-  GIT_URL="https://github.com/familytree365/backend/archive/master.zip"; \
-  wget --no-check-certificate -O master.zip $GIT_URL; \
-  unzip backend-master.zip;
 
-COPY .env.docker .env
+  cd /var/www; \
+  wget --no-check-certificate -O master.zip https://github.com/familytree365/backend/archive/master.zip; \
+  unzip master.zip;\
+  cp backend-master/* ./

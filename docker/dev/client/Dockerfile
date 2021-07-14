@@ -7,6 +7,7 @@ WORKDIR /var/www/client
 # Configure host
 ENV HOST 0.0.0.0
 
+
 RUN apt update && \
 	apt upgrade && \
 	apt --no-cache add tar curl tini \
@@ -14,13 +15,11 @@ RUN apt update && \
 	&& apt del devs gcc make python wget unzip ca-certificates \
 	&& npm cache clean \
 	&& rm -rf /tmp/npm* \
-  
-  GIT_URL="https://github.com/familytree365/frontend/archive/master.zip"; \
-  wget --no-check-certificate -O master.zip $GIT_URL; \
-  unzip frontend-master.zip;
 
-
-COPY .env.docker .env
-
+  cd /var/www/client; \
+  wget --no-check-certificate -O master.zip https://github.com/familytree365/frontend/archive/master.zip; \
+  unzip master.zip; \
+  cp frontend-master/package.json .
+  cp frontend-master/* .
 # Init command
 CMD ["sh", "-c", "yarn install && yarn dev"]

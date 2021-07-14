@@ -19,7 +19,6 @@ RUN apt update && \
   cd /var/www/client; \
   wget --no-check-certificate -O master.zip https://github.com/familytree365/frontend/archive/master.zip; \
   unzip master.zip; \
-  cp frontend-master/package.json . \
-  cp frontend-master/* .
+  mv frontend-master/* .
 # Init command
 CMD ["sh", "-c", "yarn install && yarn dev"]

@@ -17,4 +17,4 @@ RUN apt update && \
   cd /var/www; \
   wget --no-check-certificate -O master.zip https://github.com/familytree365/backend/archive/master.zip; \
   unzip master.zip;\
-  cp backend-master/* ./
+  mv backend-master/* ./

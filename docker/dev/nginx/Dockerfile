@@ -14,3 +14,5 @@ RUN apt update && \
   
   GIT_URL="https://github.com/familytree365/backend/archive/master.zip"; \
   unzip master.zip; \
+
+COPY .env.testing .env

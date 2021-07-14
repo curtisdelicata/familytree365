@@ -29,7 +29,7 @@ services:
     env_file:
       - ./.env.api
     depends_on:
-      - client
+      - frontend
       - php
     networks:
       - familytree365
@@ -97,14 +97,14 @@ services:
     networks:
       - familytree365
 
-  # Client container
+  # frontend container
   frontend:
     build:
-      context: docker/dev/client
+      context: docker/dev/frontend
       dockerfile: Dockerfile
     image: familytree365/frontend  # goes to your repository on Docker Hub
     env_file:
-      - ./.env.client
+      - ./.env.frontend
     networks:
           - familytree365
 

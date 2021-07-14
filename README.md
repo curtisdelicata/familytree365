@@ -1,4 +1,4 @@
-## Dockerized starter template for Laravel + Nuxt.JS project.
+## Dockerized template for Family Tree 365 - Open source family tree builder website.
 
 ## Overview
 Look at one of the following topics to learn more about the project

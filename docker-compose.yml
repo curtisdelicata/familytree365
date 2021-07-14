@@ -3,6 +3,13 @@ version: '3'
 ######### Services ###################################
 
 services:
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=landlord
+    ports:
+      - "3306:3306"
   # Server container
   nginx:
     build:
@@ -32,8 +39,7 @@ services:
       XDEBUG_CONFIG: "remote_enable=1"
       PHP_IDE_CONFIG: "serverName=Docker"
     depends_on:
-      - postgres
-      - postgres-testing
+      - mysql
       - redis
       - mailhog
 
@@ -47,7 +53,7 @@ services:
       - ./docker/dev/supervisor/conf.d:/etc/supervisor/conf.d
       - ./docker/dev/supervisor/logs:/var/log
     depends_on:
-      - postgres
+      - mysql
       - redis
       - mailhog
 

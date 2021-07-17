@@ -16,4 +16,8 @@ RUN apk update && \
   cd /var/www; \
   wget --no-check-certificate -O master.zip https://github.com/familytree365/backend/archive/master.zip; \
   unzip master.zip;\
-  mv backend-master/* /var/www/
+  mv backend-master/* /var/www/ \
+  composer install \
+  mysqladmin create landlord --host="127.0.0.1" --user="root" --password="password" \
+  php artisan key:generate \
+  php artisan migrate --path=database/migrations/landlord --database=landlord --force

@@ -20,4 +20,4 @@ RUN apk update && \
   unzip master.zip; \
   mv frontend-master/* /var/www/client/
 # Init command
-CMD ["sh", "-c", "yarn install && yarn dev"]
+CMD ["sh", "-c", "yarn install && yarn generate"]

@@ -7,7 +7,7 @@ services:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=landlord
+      - MYSQL_DATABASE=genealogy
     ports:
       - "3306:3306"
     networks:

@@ -18,7 +18,7 @@ services:
     build:
       context: docker/dev/nginx
       dockerfile: Dockerfile
-    image: familytree365/backend  # goes to your repository on Docker Hub
+    image: familytree365/genealogy  # goes to your repository on Docker Hub
     volumes:
       - ./docker/dev/nginx/logs:/var/log/nginx
     ports:
@@ -102,7 +102,7 @@ services:
     build:
       context: docker/dev/frontend
       dockerfile: Dockerfile
-    image: familytree365/frontend  # goes to your repository on Docker Hub
+    image: familytree365/nuxt  # goes to your repository on Docker Hub
     env_file:
       - ./.env.frontend
     networks:

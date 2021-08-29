@@ -252,7 +252,7 @@ install-laravel:
 	sudo rm -rf api
 	mkdir api
 	docker-compose up -d
-	docker-compose exec php composer create-project --prefer-dist laravel/laravel .
+	docker-compose exec php composer create-project --prefer-dist familytree365/genealogy .
 	sudo chown ${USER}:${USER} -R api
 	sudo chmod -R 777 api/bootstrap/cache
 	sudo chmod -R 777 api/storage
@@ -266,10 +266,10 @@ install-laravel:
 install-nuxt:
 	docker-compose down
 	sudo rm -rf client
-	docker-compose run client yarn create nuxt-app ../client
+	git clone https://github.com/familytree365/nuxt.git ../client
 	sudo chown ${USER}:${USER} -R client
 	cp .env.client client/.env
-	sed -i "1i require('dotenv').config()" client/nuxt.config.js
+	# sed -i "1i require('dotenv').config()" client/nuxt.config.js
 	docker-compose up -d
 	docker-compose exec client yarn info nuxt version
 

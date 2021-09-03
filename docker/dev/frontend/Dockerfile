@@ -6,9 +6,8 @@ RUN apk add --no-cache openssh
 WORKDIR /data
 RUN git clone https://github.com/familytree365/nuxt.git --depth 1 /data/app
 WORKDIR /data/app
-RUN yarn install
 
-CMD ["sh", "-c", "yarn dev"]
+CMD ["sh", "-c", "yarn install && yarn dev"]
 
 
 EXPOSE 3000

@@ -16,7 +16,7 @@ RUN apk add --no-cache mysql-client
 WORKDIR /data
 RUN git clone https://github.com/familytree365/genealogy.git --depth 1 /data/app
 WORKDIR /data/app
-RUN composer install \
+RUN composer install
 # RUN mysqladmin create landlord --host="127.0.0.1" --user="root" --password="password" \
 # RUN php artisan key:generate
 # RUN php artisan migrate --seed --force

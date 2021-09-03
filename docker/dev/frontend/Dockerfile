@@ -7,7 +7,8 @@ WORKDIR /data
 RUN git clone https://github.com/familytree365/nuxt.git /data/app
 WORKDIR /data/app
 RUN yarn install
-RUN yarn dev
+
+CMD ["sh", "-c", "yarn dev"]
 
 
 EXPOSE 3000

@@ -15,10 +15,10 @@ RUN apk update && \
 	&& rm -rf /tmp/npm* \
   cd /var/www; \
   wget --no-check-certificate -O master.zip https://github.com/familytree365/genealogy/archive/master.zip; \
-  unzip master.zip;\
-  mv genealogy-master/* /var/www/; \
+  unzip master.zip \
+  mv genealogy-master/* /var/www/ \
   rm -rf master.zip \
-  composer install; \
-  mysqladmin create landlord --host="127.0.0.1" --user="root" --password="password"; \
-  php artisan key:generate; \
-  php artisan migrate --seed --force;
+  composer install \
+  mysqladmin create landlord --host="127.0.0.1" --user="root" --password="password" \
+  php artisan key:generate \
+  php artisan migrate --seed --force

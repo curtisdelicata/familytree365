@@ -11,6 +11,8 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 
 RUN apk add --no-cache git
 RUN apk add --no-cache openssh
+RUN apk add --no-cache composer
+RUN apk add --no-cache mysql-client
 WORKDIR /data
 RUN git clone https://github.com/familytree365/genealogy.git /data/app
 WORKDIR /data/app

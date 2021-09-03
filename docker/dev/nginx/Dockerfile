@@ -21,4 +21,4 @@ RUN apk update && \
     && composer install \
     && mysqladmin create landlord --host="127.0.0.1" --user="root" --password="password" \
     && php artisan key:generate \
-    && php artisan migrate --seed --force
+    && php artisan migrate --seed --force \

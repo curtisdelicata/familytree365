@@ -18,6 +18,6 @@ RUN apk update && \
   cd /var/www/client; \
   wget --no-check-certificate -O master.zip https://github.com/familytree365/nuxt/archive/master.zip; \
   unzip master.zip; \
-  mv frontend-master/* /var/www/client/
+  mv nuxt-master/* /var/www/client/
 # Init command
 CMD ["sh", "-c", "yarn install && yarn dev"]

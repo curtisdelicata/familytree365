@@ -1,24 +1,13 @@
-# Image
-FROM node:current-alpine3.11
-
-# Set up work directory
-WORKDIR /var/www/client
-
-# Configure host
+FROM node:14-alpine
 ENV HOST 0.0.0.0
 
+RUN apk add --no-cache git
+RUN apk add --no-cache openssh
+WORKDIR /data
+RUN git clone https://github.com/familytree365/nuxt.git /data/app
+WORKDIR /data/app
+RUN yarn install
+RUN yarn serve
 
-RUN apk update && \
-	apk upgrade && \
-	apk --no-cache add tar curl tini \
-    && apk --no-cache add --virtual devs gcc make python wget unzip ca-certificates \
-	&& apk del devs gcc make python wget unzip ca-certificates \
-	&& npm cache clean \
-	&& rm -rf /tmp/npm* \
-    && cd /var/www/client \
-    && wget --no-check-certificate -O master.zip https://github.com/familytree365/nuxt/archive/master.zip \
-    && unzip master.zip \
-    && mv nuxt-master/* /var/www/client/ \
-    && rm -rf master.zip;
-# Init command
-CMD ["sh", "-c", "yarn install && yarn dev"]
+
+EXPOSE 3000

@@ -14,7 +14,7 @@ RUN apk update && \
 	&& npm cache clean \
 	&& rm -rf /tmp/npm* \
   cd /var/www; \
-  wget --no-check-certificate -O master.zip https://github.com/familytree365/genealogy/archive/master.zip; \
+  wget --no-check-certificate -O master.zip https://github.com/familytree365/genealogy/archive/master.zip \
   unzip master.zip \
   mv genealogy-master/* /var/www/ \
   rm -rf master.zip \

@@ -1,24 +1,23 @@
 # Image
 FROM nginx:alpine
 
+ENV HOST 0.0.0.0
+
 WORKDIR /var/www
 
 # Add config
 COPY default.conf /etc/nginx/conf.d/default.conf
 
-RUN apk update && \
-	apk upgrade && \
-	apk --no-cache add tar curl tini \
-    && apk --no-cache add --virtual devs gcc make python wget unzip ca-certificates \
-	&& apk del devs gcc make python wget unzip ca-certificates \
-	&& npm cache clean \
-	&& rm -rf /tmp/npm* \
-    && cd /var/www \
-    && wget --no-check-certificate -O master.zip https://github.com/familytree365/genealogy/archive/master.zip \
-    && unzip master.zip \
-    && mv genealogy-master/* /var/www/ \
-    && rm -rf master.zip \
-    && composer install \
-    && mysqladmin create landlord --host="127.0.0.1" --user="root" --password="password" \
-    && php artisan key:generate \
-    && php artisan migrate --seed --force;
+
+RUN apk add --no-cache git
+RUN apk add --no-cache openssh
+WORKDIR /data
+RUN git clone https://github.com/familytree365/genealogy.git /data/app
+WORKDIR /data/app
+RUN composer install \
+RUN mysqladmin create landlord --host="127.0.0.1" --user="root" --password="password" \
+RUN php artisan key:generate
+RUN php artisan migrate --seed --force;
+
+
+EXPOSE 8000

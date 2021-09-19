@@ -30,7 +30,7 @@ WORKDIR /data/app
 RUN composer install
 
 # RUN mysqladmin create landlord --host="127.0.0.1" --user="root" --password="password" \
-# RUN php artisan key:generate
+RUN php artisan key:generate
 # RUN php artisan migrate --seed --force
 
 
